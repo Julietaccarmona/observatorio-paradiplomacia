@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Convenios</title>
+  </head>
+  <body>
+    <h1>Convenios Internacionales</h1>
+
+    <ul>
+      {% for c in convenios %}
+      <li>
+        <strong>{{ c.provincia }}</strong> - {{ c.pais }} ({{ c.anio }})<br />
+        Tipo: {{ c.tipo }}<br />
+        Actor: {{ c.actor }}<br />
+        {{ c.descripcion }}
+      </li>
+      <hr />
+      {% endfor %}
+    </ul>
+  </body>
+</html>
