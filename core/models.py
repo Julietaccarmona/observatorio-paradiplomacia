@@ -9,19 +9,19 @@ class Provincia(models.Model):
     def __str__(self):
         return self.nombre
 
-
 class Actor(models.Model):
     nombre = models.CharField(max_length=100)
+    tipo = models.CharField(max_length=50)
 
     def __str__(self):
         return self.nombre
 
-
 class Convenio(models.Model):
     provincia = models.ForeignKey(Provincia, on_delete=models.CASCADE)
-    pais = models.CharField(max_length=100)
-    tipo = models.CharField(max_length=100)
     actor = models.ForeignKey(Actor, on_delete=models.CASCADE)
+
+    pais = models.CharField(max_length=100)
+    tipo_acuerdo = models.CharField(max_length=100)
     anio = models.IntegerField()
     descripcion = models.TextField()
 
