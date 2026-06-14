@@ -1,21 +1,86 @@
 <!doctype html>
-<html>
+<html lang="es">
   <head>
-    <title>Convenios</title>
+    <meta charset="UTF-8" />
+    <title>Observatorio de Paradiplomacia</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f9;
+        margin: 40px;
+      }
+
+      h1 {
+        color: #5f1e4f;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+      }
+
+      th {
+        background-color: #1e3a5f;
+        color: white;
+        padding: 12px;
+      }
+
+      td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: auto;
+      }
+
+      .subtitulo {
+        color: #666;
+        margin-bottom: 20px;
+      }
+    </style>
   </head>
   <body>
-    <h1>Convenios Internacionales</h1>
+    <div class="container">
+      <h1>Observatorio de Paradiplomacia Provincial</h1>
 
-    <ul>
-      {% for c in convenios %}
-      <li>
-        <strong>{{ c.provincia }}</strong> - {{ c.pais }} ({{ c.anio }})<br />
-        Tipo: {{ c.tipo }}<br />
-        Actor: {{ c.actor }}<br />
-        {{ c.descripcion }}
-      </li>
-      <hr />
-      {% endfor %}
-    </ul>
+      <p class="subtitulo">
+        Registro de convenios internacionales desarrollados por actores
+        subnacionales argentinos.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Provincia</th>
+            <th>Actor</th>
+            <th>Tipo de Actor</th>
+            <th>País</th>
+            <th>Tipo de Acuerdo</th>
+            <th>Año</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for convenio in convenios %}
+          <tr>
+            <td>{{ convenio.provincia }}</td>
+            <td>{{ convenio.actor.nombre }}</td>
+            <td>{{ convenio.actor.tipo }}</td>
+            <td>{{ convenio.pais }}</td>
+            <td>{{ convenio.tipo_acuerdo }}</td>
+            <td>{{ convenio.anio }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </body>
 </html>
