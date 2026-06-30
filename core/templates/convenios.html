@@ -45,7 +45,23 @@
         color: #666;
         margin-bottom: 20px;
       }
+
+      .boton {
+        display: inline-block;
+        background-color: #1e3a5f;
+        color: white;
+        padding: 10px 16px;
+        text-decoration: none;
+        border-radius: 6px;
+        margin-bottom: 20px;
+      }
+
+      .boton:hover {
+        background-color: #2d537f;
+      }
     </style>
+
+    
   </head>
   <body>
     <div class="container">
@@ -55,16 +71,45 @@
         Registro de convenios internacionales desarrollados por actores
         subnacionales argentinos.
       </p>
+      
+      <p>
+        <a href="{% url 'crear_convenio' %}" class="boton">
+          ➕ Registrar nuevo convenio
+        </a>
+      </p>
+
+      <form method="get">
+
+         <label for="provincia">Provincia:</label>
+
+          <select name="provincia" id="provincia">
+
+             <option value="">Todas</option>
+
+              {% for provincia in provincias %}
+                <option value="{{ provincia.id }}">
+                   {{ provincia.nombre }}
+                 </option>
+              {% endfor %}
+
+          </select>
+
+        <button type="submit">Filtrar</button>
+
+      </form>
+
+      <br>
 
       <table>
         <thead>
           <tr>
             <th>Provincia</th>
-            <th>Actor</th>
-            <th>Tipo de Actor</th>
+            <th>Actores</th>
             <th>País</th>
-            <th>Tipo de Acuerdo</th>
-            <th>Año</th>
+            <th>Tipo de acuerdo</th>
+            <th>Tema</th>
+            <th>Fecha</th>
+            <th>Estado</th>
           </tr>
         </thead>
 
@@ -72,11 +117,23 @@
           {% for convenio in convenios %}
           <tr>
             <td>{{ convenio.provincia }}</td>
-            <td>{{ convenio.actor.nombre }}</td>
-            <td>{{ convenio.actor.tipo }}</td>
+
+            <td>
+              {% for actor in convenio.actores.all %}
+               {{ actor.nombre }}
+               {% if not forloop.last %}, {% endif %}
+              {% endfor %}
+            </td>
+
             <td>{{ convenio.pais }}</td>
+
             <td>{{ convenio.tipo_acuerdo }}</td>
-            <td>{{ convenio.anio }}</td>
+
+            <td>{{ convenio.tema }}</td>
+
+            <td>{{ convenio.fecha_firma }}</td>
+
+            <td>{{ convenio.estado }}</td>
           </tr>
           {% endfor %}
         </tbody>
