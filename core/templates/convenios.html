@@ -87,9 +87,13 @@
              <option value="">Todas</option>
 
               {% for provincia in provincias %}
-                <option value="{{ provincia.id }}">
-                   {{ provincia.nombre }}
-                 </option>
+                  <option value="{{ provincia.id }}"
+                      {% if provincia_seleccionada == provincia.id|stringformat:"s" %}
+                          selected
+                      {% endif %}
+                  >
+                      {{ provincia.nombre }}
+                  </option>
               {% endfor %}
 
           </select>

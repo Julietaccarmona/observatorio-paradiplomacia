@@ -7,9 +7,14 @@ from .forms import ConvenioForm
 
 def lista_convenios(request):
 
+    provincias = Provincia.objects.all()
+
     convenios = Convenio.objects.all()
 
-    provincias = Provincia.objects.all()
+    provincia_id = request.GET.get("provincia")
+
+    if provincia_id:
+        convenios = convenios.filter(provincia_id=provincia_id)
 
     return render(
         request,
@@ -17,9 +22,9 @@ def lista_convenios(request):
         {
             "convenios": convenios,
             "provincias": provincias,
+            "provincia_seleccionada": provincia_id,
         },
     )
-
 
 def crear_convenio(request):
     if request.method == 'POST':
